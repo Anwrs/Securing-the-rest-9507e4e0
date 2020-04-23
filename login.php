@@ -16,7 +16,6 @@ try {
 } catch (\PDOException $e) {
     throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
-$fout = 0;
 ?>
 
 <a href="index.php">Terug</a>
@@ -28,17 +27,5 @@ $fout = 0;
 </form>
 
 <?php 
-if (isset($_POST['login'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    $stmt = $pdo->prepare("SELECT * FROM gebruikers WHERE username=? AND password=?");
-    $stmt->execute([$username,$password]); 
-    $user = $stmt->fetch();
-    if ($user) {
-        $_COOKIE['loggedInUser'] = $user['id'];
-        echo '<h2 style="color:green">Uw bent ingelogd</h2>';
-    } else {
-        echo '<h2 style="color:red">Username and Password do not match</h2>';
-    }
-}
+include 'config.php';
+?>
